@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 from PIL import Image
 import PIL.ExifTags 
+import webbrowser 
 import io
 import os
 
@@ -30,6 +31,9 @@ def save_image(filename):
         with open(filename, 'wb') as file:
             image_atual.save(file)
 
+def open(x, y):
+    webbrowser.open(f'https://www.google.com.br/maps/@{x},{y},20z?entry=ttu')
+
 def get_exif_data(image_path):
     img = Image.open(image_path)
     if hasattr(img, '_getexif'):
@@ -46,8 +50,12 @@ def get_exif_data(image_path):
                         p1 = convert_to_degress(x)
                         y = value[4]
                         p2 = convert_to_degress(y)
+                        if(value[3] == 'W'):
+                            p2 = p2*-1
 
-                        print(p1, " ", p2)
+                        open(p1, p2)
+
+                        # print(p1, " ", p2)
                         # https://www.google.com.br/maps/@20.6480833,-156.4424444,20z?entry=ttu -> resultado
                         # print(value[1], " ",  value[2])
                         # print(value[3], " ", value[4])

@@ -9,6 +9,7 @@ def load_image(path):
     img.save(bio, format = 'PNG')
     return bio.getvalue()
 
+
 menu_def = [['Open File', ['Open']], ['Help', ['About']],]
 
 layout = [[sg.Menu(menu_def)],
